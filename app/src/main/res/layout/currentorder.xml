@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".CurrentOrderActivity">
+    <ListView
+            android:layout_width="315dp"
+            android:layout_height="283dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.261"
+            android:background="#FAF0F0" android:id="@+id/pizzaOrders"/>
+    <TextView
+            android:text="@string/current_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/currentOrderTitle"
+            app:layout_constraintBottom_toTopOf="@+id/pizzaOrders"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.14" android:textSize="34sp" android:textStyle="bold"
+            android:textAlignment="center" android:textAllCaps="false"/>
+    <EditText
+            android:layout_width="126dp"
+            android:layout_height="48dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/orderNum"
+            android:textAlignment="center" android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/currentOrderTitle"
+            android:layout_marginTop="16dp"
+            android:hint="@string/order_number"
+            app:layout_constraintBottom_toTopOf="@+id/pizzaOrders" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.0" app:layout_constraintStart_toStartOf="parent"
+            android:textColorHint="#757575" app:layout_constraintHorizontal_bias="0.498"
+            android:text="@string/order_number" android:autofillHints=""/>
+    <Button
+            android:text="@string/remove_pizza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/removePizza"
+            app:layout_constraintTop_toBottomOf="@+id/pizzaOrders"
+            android:layout_marginTop="20dp" app:layout_constraintStart_toStartOf="@+id/pizzaOrders"
+            android:onClick="removePizza"/>
+    <EditText
+            android:layout_width="98dp"
+            android:layout_height="49dp"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/subtotal"
+            android:hint="@string/subtotal" android:textColorHint="#757575"
+            android:text="@string/subtotal"
+            app:layout_constraintTop_toBottomOf="@+id/removePizza"
+            android:layout_marginTop="20dp" app:layout_constraintStart_toStartOf="@+id/pizzaOrders"
+            android:importantForAutofill="no"/>
+    <EditText
+            android:layout_width="98dp"
+            android:layout_height="49dp"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/salesTax"
+            android:hint="@string/sales_tax" android:textColorHint="#757575"
+            android:text="@string/sales_tax"
+            app:layout_constraintTop_toBottomOf="@+id/subtotal"
+            android:layout_marginTop="24dp" app:layout_constraintStart_toStartOf="@+id/pizzaOrders"
+            android:importantForAutofill="no"/>
+    <Button
+            android:text="@string/clear_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/clearOrder"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/pizzaOrders"
+            android:layout_marginTop="20dp" app:layout_constraintEnd_toEndOf="@+id/pizzaOrders"
+            android:onClick="clear"/>
+    <Button
+            android:text="@string/place_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/placeOrder"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toStartOf="@+id/pizzaOrders"
+            app:layout_constraintTop_toBottomOf="@+id/orderTotal" android:layout_marginTop="32dp"
+            android:onClick="placeOrder"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/orderTotal"
+            app:layout_constraintTop_toBottomOf="@+id/salesTax"
+            android:layout_marginTop="20dp" app:layout_constraintStart_toStartOf="@+id/pizzaOrders"
+            android:hint="@string/order_total" android:text="@string/order_total" android:minHeight="48dp"
+            android:importantForAutofill="no"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

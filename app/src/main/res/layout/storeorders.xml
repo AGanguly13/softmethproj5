@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <TextView
+            android:text="@string/store_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView"
+            android:textSize="34sp" android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.052"/>
+    <Spinner
+            android:layout_width="295dp"
+            android:layout_height="50dp" android:id="@+id/selectOrder"
+            tools:visibility="visible" android:foregroundTint="#D68080"
+            app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"
+            android:contentDescription="@string/sales_tax"/>
+    <ListView
+            android:layout_width="304dp"
+            android:layout_height="389dp"
+            android:id="@+id/storeOrdersList" android:background="#FFA9A9" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.495" app:layout_constraintVertical_bias="0.42"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:ems="10"
+            android:id="@+id/storeOrderTotal"
+            app:layout_constraintTop_toBottomOf="@+id/storeOrdersList"
+            android:layout_marginTop="24dp" app:layout_constraintStart_toStartOf="@+id/storeOrdersList"
+            android:text="@string/order_total" android:minHeight="48dp" android:importantForAutofill="no"/>
+    <Button
+            android:text="@string/cancel_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/cancelOrder"
+            app:layout_constraintStart_toStartOf="@+id/storeOrdersList"
+            app:layout_constraintTop_toBottomOf="@+id/storeOrderTotal" android:layout_marginTop="20dp"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>
