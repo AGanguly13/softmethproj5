@@ -68,7 +68,7 @@
                     android:textSize="10sp"/>
             <CheckBox
                     android:text="@string/Onion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="76dp"
                     android:layout_height="wrap_content" android:id="@+id/Onion"
                     android:layout_weight="1"
                     android:textSize="10sp"/>

@@ -41,7 +41,7 @@ public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaHolder>
     @Override
     public void onBindViewHolder(@NotNull PizzaHolder holder, int position) {
         holder.pizza_Name.setText(pizzas.get(position).toString());
-        holder.pizza_Image.setImageResource(R.drawable.chicagopizza);
+        holder.pizza_Image.setImageResource(R.drawable.pizza);
         holder.pizza = pizzas.get(position);
     }
 

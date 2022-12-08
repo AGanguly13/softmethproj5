@@ -221,7 +221,7 @@ public class PizzaSelectedActivity extends AppCompatActivity {
 
         else {
             Intent intent = new Intent(view.getContext(), MainActivity.class);
-            intent.putExtra("ORDEREDPIZZA", newPizza);
+            MainActivity.pizzasInOrder.add(newPizza);
             view.getContext().startActivity(intent);
             finish();
         }
