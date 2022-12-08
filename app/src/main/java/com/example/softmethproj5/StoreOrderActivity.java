@@ -42,11 +42,13 @@ public class StoreOrderActivity extends AppCompatActivity {
 
         adapterNumbers = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, orderSerialNumbers);
         orderNumList.setAdapter(adapterNumbers);
+
+        setOrdersList(MainActivity.ordersList);
     }
 
     /**
      * This method displays an order based on which serial number is selected from the Combo Box by the user. This method is invoked when a user selects a serial number
-     * from the Combo Box.
+     * from the Spinner
      */
     public void displayCurrentOrder() {
         double orderPrice = 0;

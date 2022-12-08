@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.nypizza, R.drawable.nydeluxe, R.drawable.nymeatzza, R.drawable.nypizza};
 
     public static ArrayList<Pizza> pizzasInOrder = new ArrayList<>();
+
+    public static ArrayList<Order> ordersList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

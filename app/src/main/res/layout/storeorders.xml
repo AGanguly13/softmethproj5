@@ -25,7 +25,7 @@
             android:id="@+id/storeOrdersList" android:background="#FFA9A9" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.495" app:layout_constraintVertical_bias="0.42"/>
+            app:layout_constraintHorizontal_bias="0.542" app:layout_constraintVertical_bias="0.543"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,5 +41,5 @@
             android:layout_height="wrap_content" android:id="@+id/cancelOrder"
             app:layout_constraintStart_toStartOf="@+id/storeOrdersList"
             app:layout_constraintTop_toBottomOf="@+id/storeOrderTotal" android:layout_marginTop="20dp"
-    />
+            android:onClick="cancelOrder"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
