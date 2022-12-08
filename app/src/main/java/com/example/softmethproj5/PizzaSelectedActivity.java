@@ -184,17 +184,18 @@ public class PizzaSelectedActivity extends AppCompatActivity {
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checked) {
-                switch(checked) {
-                    case R.id.smallButton:
-                        pizza.setSize(Size.SMALL);
-                    case R.id.mediumButton:
-                        pizza.setSize(Size.MEDIUM);
-                    case R.id.largeButton:
-                        pizza.setSize(Size.LARGE);
+                if (small.isChecked()) {
+                    pizza.setSize(Size.SMALL);
                 }
+                else if (medium.isChecked()) {
+                    pizza.setSize(Size.MEDIUM);
+                }
+                else if (large.isChecked()) {
+                    pizza.setSize(Size.LARGE);
+                }
+                setPrice(pizza);
             }
         });
-        setPrice(pizza);
     }
 
     public void addPizza(View view) {
