@@ -1,5 +1,6 @@
 package com.example.softmethproj5;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author Adwait Ganguly, Kennan Guan
  */
-public abstract class Pizza implements Customizable {
+public abstract class Pizza implements Customizable, Serializable {
     private ArrayList<Topping> toppings;
     private Crust crust;
     private Size size;
@@ -81,4 +82,11 @@ public abstract class Pizza implements Customizable {
         return crust;
     }
 
+    /**
+     * This is a setter method for a Pizza object's Size.
+     * @param size is the size that the pizza is set to.
+     */
+    public void setSize(Size size) {
+        this.size = size;
+    }
 }
