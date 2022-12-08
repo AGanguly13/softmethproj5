@@ -10,7 +10,7 @@
         <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
-                android:layout_height="34dp" android:id="@+id/textView3"
+                android:layout_height="34dp" android:id="@+id/pizza_name"
                 android:gravity="center"/>
         <ImageView
                 android:layout_width="match_parent"
@@ -158,6 +158,6 @@
                 android:layout_height="wrap_content" android:id="@+id/button"
                 android:layout_marginTop="30dp"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" android:onClick="addPizza"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

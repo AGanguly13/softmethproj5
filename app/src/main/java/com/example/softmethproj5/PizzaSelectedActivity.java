@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -70,6 +71,7 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         //String pizzaInfo = intent.getStringExtra("PIZZA");
         newPizza = (Pizza) intent.getSerializableExtra("PIZZA");
 
+        pizzaName = (TextView) findViewById(R.id.pizza_name);
         setPizzaName(newPizza);
         setToppings(newPizza);
         setPrice(newPizza);
@@ -122,33 +124,32 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         }
         enableCheckBoxes();
         for (Topping topping: pizzaInformation.getToppings()) {
-            switch (topping) {
-                case SAUSAGE:
-                    sausage.setChecked(true);
-                case PEPPERONI:
-                    pepperoni.setChecked(true);
-                case GREENPEPPER:
-                    greenpepper.setChecked(true);
-                case ONION:
-                    onion.setChecked(true);
-                case MUSHROOM:
-                    mushroom.setChecked(true);
-                case BBQCHICKEN:
-                    bbqchicken.setChecked(true);
-                case PROVOLONE:
-                    provolone.setChecked(true);
-                case CHEDDAR:
-                    cheddar.setChecked(true);
-                case BEEF:
-                    beef.setChecked(true);
-                case HAM:
-                    ham.setChecked(true);
-                case PINEAPPLE:
-                    pineapple.setChecked(true);
-                case OLIVE:
-                    olive.setChecked(true);
-                case BUFFALOSAUCE:
-                    buffalosauce.setChecked(true);
+            if (topping.toString().equalsIgnoreCase("SAUSAGE")) {
+                sausage.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("PEPPERONI")) {
+                pepperoni.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("GREENPEPPER")) {
+                greenpepper.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("ONION")) {
+                onion.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("MUSHROOM")) {
+                mushroom.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("BBQCHICKEN")) {
+                bbqchicken.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("PROVOLONE")) {
+                provolone.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("CHEDDAR")) {
+                cheddar.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("BEEF")) {
+                beef.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("HAM")) {
+                ham.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("PINEAPPLE")) {
+                pineapple.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("OLIVE")) {
+                olive.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("BUFFALOSAUCE")) {
+                buffalosauce.setChecked(true);
             }
         }
         disableCheckboxes();
@@ -157,9 +158,7 @@ public class PizzaSelectedActivity extends AppCompatActivity {
     public void disableCheckboxes() {
         for (int x = 0; x < checkboxes.length; x++) {
             CheckBox checkBox = (CheckBox) findViewById(checkboxes[x]);
-            if (!checkBox.isChecked()) {
-                checkBox.setEnabled(false);
-            }
+            checkBox.setEnabled(false);
         }
     }
 

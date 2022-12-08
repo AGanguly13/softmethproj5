@@ -21,16 +21,23 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Pizza> pizzasInOrder = new ArrayList<>();
 
     public static ArrayList<Order> ordersList = new ArrayList<>();
+
+    /**
+     * This method initializes the Main Activity screen that contains the Recycler View of all
+     * the pizzas options the user can choose from.
+     * @param savedInstanceState contains the data associated with the activity when it is exited.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         RecyclerView pizzaRCView = findViewById(R.id.rcViewMain);
+        pizzaRCView.setLayoutManager(new LinearLayoutManager(this));
         fillRecycleViewArray();
         PizzaAdapter adapter = new PizzaAdapter(this, pizzas);
         pizzaRCView.setAdapter(adapter);
-        pizzaRCView.setLayoutManager(new LinearLayoutManager(this));
+
 
         setButtonListener();
     }
