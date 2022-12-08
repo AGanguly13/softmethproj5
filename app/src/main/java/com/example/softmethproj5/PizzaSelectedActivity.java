@@ -1,0 +1,230 @@
+package com.example.softmethproj5;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+
+public class PizzaSelectedActivity extends AppCompatActivity {
+
+    private TextView pizzaName;
+
+    private ImageView pizzaImage;
+
+    private String pizzaInfo;
+
+    private TextView pizzaPrice = findViewById(R.id.pizzaPrice);
+
+    private RadioButton small = findViewById(R.id.smallButton);
+
+    private RadioButton medium = findViewById(R.id.mediumButton);
+
+    private RadioButton large = findViewById(R.id.largeButton);
+
+    private RadioGroup radioGroup;
+    private Pizza newPizza;
+
+    private CheckBox sausage = findViewById(R.id.Sausage);
+
+    private CheckBox pepperoni = findViewById(R.id.Pepperoni);
+
+    private CheckBox greenpepper = findViewById(R.id.GreenPepper);
+
+    private CheckBox onion = findViewById(R.id.Onion);
+
+    private CheckBox mushroom = findViewById(R.id.Mushroom);
+
+    private CheckBox bbqchicken = findViewById(R.id.BBQChicken);
+
+    private CheckBox provolone = findViewById(R.id.Provolone);
+
+    private CheckBox cheddar = findViewById(R.id.Cheddar);
+
+    private CheckBox beef = findViewById(R.id.Beef);
+
+    private CheckBox ham = findViewById(R.id.Ham);
+
+    private CheckBox pineapple = findViewById(R.id.Pineapple);
+
+    private CheckBox olive = findViewById(R.id.Olive);
+
+    private CheckBox buffalosauce = findViewById(R.id.BuffaloSauce);
+
+    private ArrayList<Topping> pizzaToppings = new ArrayList<Topping>();
+
+    private static final int NOTINSTRING = -1;
+    private static final int MAXTOPPINGS = 8;
+    private static final double TOPPINGPRICE = 1.59;
+    private static final int[] checkboxes = {R.id.Sausage, R.id.Pepperoni, R.id.GreenPepper, R.id.Onion, R.id.Mushroom, R.id.BBQChicken, R.id.Provolone, R.id.Cheddar, R.id.Beef, R.id.Ham, R.id.Pineapple,
+                                R.id.Olive, R.id.BuffaloSauce};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.pizza_selection);
+        Intent intent = getIntent();
+        //String pizzaInfo = intent.getStringExtra("PIZZA");
+        newPizza = (Pizza) intent.getSerializableExtra("PIZZA");
+
+        setPizzaName(newPizza);
+        setToppings(newPizza);
+        setPrice(newPizza);
+
+        addListenerOnRadioButton(newPizza);
+    }
+
+    public void setPizzaName(Pizza pizzaInformation) {
+        if (pizzaInformation.toString().indexOf("Chicago Style") != NOTINSTRING) {
+            if (pizzaInformation.toString().indexOf("Deluxe") != NOTINSTRING) {
+                pizzaName.setText(R.string.chicago_deluxe);
+                pizzaImage.setImageResource(R.drawable.chicagodeluxe);
+            }
+            else if (pizzaInformation.toString().indexOf("Meatzza") != NOTINSTRING) {
+                pizzaName.setText(R.string.chicago_meatzza);
+                pizzaImage.setImageResource(R.drawable.chicagomeatzza);
+            }
+            else if (pizzaInformation.toString().indexOf("BBQChicken") != NOTINSTRING) {
+                pizzaName.setText(R.string.chicago_bbq);
+                pizzaImage.setImageResource(R.drawable.chicagobbq);
+            }
+            else if (pizzaInformation.toString().indexOf("Build your own") != NOTINSTRING) {
+                pizzaName.setText(R.string.chicago_byo);
+                pizzaImage.setImageResource(R.drawable.chicagopizza);
+            }
+        }
+        else {
+            if (pizzaInformation.toString().indexOf("Deluxe") != NOTINSTRING) {
+                pizzaName.setText(R.string.ny_deluxe);
+                pizzaImage.setImageResource(R.drawable.nydeluxe);
+            }
+            else if (pizzaInformation.toString().indexOf("Meatzza") != NOTINSTRING) {
+                pizzaName.setText(R.string.ny_meatzza);
+                pizzaImage.setImageResource(R.drawable.nymeatzza);
+            }
+            else if (pizzaInformation.toString().indexOf("BBQChicken") != NOTINSTRING) {
+                pizzaName.setText(R.string.ny_bbq);
+                pizzaImage.setImageResource(R.drawable.nypizza);
+            }
+            else if (pizzaInformation.toString().indexOf("Build your own") != NOTINSTRING) {
+                pizzaName.setText(R.string.ny_byo);
+                pizzaImage.setImageResource(R.drawable.nypizza);
+            }
+        }
+    }
+
+    public void setToppings(Pizza pizzaInformation) {
+        if (pizzaInformation.toString().indexOf("Build your own") != NOTINSTRING) {
+            return;
+        }
+        enableCheckBoxes();
+        for (Topping topping: pizzaInformation.getToppings()) {
+            switch (topping) {
+                case SAUSAGE:
+                    sausage.setChecked(true);
+                case PEPPERONI:
+                    pepperoni.setChecked(true);
+                case GREENPEPPER:
+                    greenpepper.setChecked(true);
+                case ONION:
+                    onion.setChecked(true);
+                case MUSHROOM:
+                    mushroom.setChecked(true);
+                case BBQCHICKEN:
+                    bbqchicken.setChecked(true);
+                case PROVOLONE:
+                    provolone.setChecked(true);
+                case CHEDDAR:
+                    cheddar.setChecked(true);
+                case BEEF:
+                    beef.setChecked(true);
+                case HAM:
+                    ham.setChecked(true);
+                case PINEAPPLE:
+                    pineapple.setChecked(true);
+                case OLIVE:
+                    olive.setChecked(true);
+                case BUFFALOSAUCE:
+                    buffalosauce.setChecked(true);
+            }
+        }
+        disableCheckboxes();
+    }
+
+    public void disableCheckboxes() {
+        for (int x = 0; x < checkboxes.length; x++) {
+            CheckBox checkBox = (CheckBox) findViewById(checkboxes[x]);
+            if (!checkBox.isChecked()) {
+                checkBox.setEnabled(false);
+            }
+        }
+    }
+
+    public void enableCheckBoxes() {
+        for (int x = 0; x < checkboxes.length; x++) {
+            CheckBox checkBox = (CheckBox) findViewById(checkboxes[x]);
+            checkBox.setEnabled(true);
+        }
+    }
+
+    public void setPrice(Pizza pizza) {
+        pizzaPrice.setText("");
+        if (pizza.toString().indexOf("Build") != NOTINSTRING) {
+            pizzaPrice.setText(String.format("%.2f",pizza.price() + pizza.getToppings().size() * TOPPINGPRICE));
+        }
+        else {
+            pizzaPrice.setText(String.format("%.2f", pizza.price()));
+        }
+    }
+
+    public void addListenerOnRadioButton (Pizza pizza) {
+        radioGroup = findViewById(R.id.sizeGroup);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checked) {
+                switch(checked) {
+                    case R.id.smallButton:
+                        pizza.setSize(Size.SMALL);
+                    case R.id.mediumButton:
+                        pizza.setSize(Size.MEDIUM);
+                    case R.id.largeButton:
+                        pizza.setSize(Size.LARGE);
+                }
+            }
+        });
+        setPrice(pizza);
+    }
+
+    public void addPizza(View view) {
+        int counter = 0;
+        for (int x = 0; x < checkboxes.length; x++) {
+            CheckBox cBox = (CheckBox) findViewById(checkboxes[x]);
+            if (cBox.isChecked()) {
+                counter++;
+                if (newPizza.toString().indexOf("Build") != NOTINSTRING) {
+                    newPizza.getToppings().add(Topping.valueOf(cBox.getText().toString().toUpperCase()));
+                }
+            }
+        }
+        if (counter > MAXTOPPINGS) {
+            newPizza.getToppings().clear();
+            Context context = getApplicationContext();
+            CharSequence text = "You can only select a maximum of 8 toppings.";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+        else {
+            Intent intent = new Intent(view.getContext(), MainActivity.class);
+            intent.putExtra("ORDEREDPIZZA", newPizza);
+            view.getContext().startActivity(intent);
+            finish();
+        }
+    }
+
+}

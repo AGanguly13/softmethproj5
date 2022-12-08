@@ -17,4 +17,37 @@
     <string name="cancel_order">Cancel Order</string>
 
     <string name="largeSize">LARGE</string>
+
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+
+    <string name="toppings">Toppings:</string>
+    <string name="price">Price:</string>
+
+    <string name="Sausage">Sausage</string>
+    <string name="Pepperoni">Pepperoni</string>
+    <string name="GreenPepper">Green Pepper</string>
+    <string name="Onion">Onion</string>
+    <string name="Mushroom">Mushroom</string>
+    <string name="BBQChicken">BBQ Chicken</string>
+    <string name="Provolone">Provolone</string>
+    <string name="Cheddar">Cheddar</string>
+    <string name="Beef">Beef</string>
+    <string name="Ham">Ham</string>
+    <string name="Pineapple">Pineapple</string>
+    <string name="Olive">Olive</string>
+    <string name="BuffaloSauce">Buffalo Sauce</string>
+
+    <string name="add_pizza">Add Pizza</string>
+
+    <string name="chicago_deluxe">Chicago Style Deluxe</string>
+    <string name="chicago_meatzza">Chicago Style Meatzza</string>
+    <string name="chicago_bbq">Chicago Style BBQ Chicken</string>
+    <string name="chicago_byo">Chicago Style Build Your Own</string>
+    <string name="ny_deluxe">NY Style Deluxe</string>
+    <string name="ny_meatzza">NY Style Meatzza</string>
+    <string name="ny_bbq">NY Style BBQ Chicken</string>
+    <string name="ny_byo">NY Style Build Your Own</string>
+
 </resources>

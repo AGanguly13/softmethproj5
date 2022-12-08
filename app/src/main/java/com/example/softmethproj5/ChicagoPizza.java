@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @author Adwait Ganguly, Kennan Guan
  */
-public class ChicagoPizza implements PizzaFactory{
+public class ChicagoPizza implements PizzaFactory {
 
     /**
      * This method constructs a Deluxe flavored Chicago Style Pizza with a default Deep Dish crust.
