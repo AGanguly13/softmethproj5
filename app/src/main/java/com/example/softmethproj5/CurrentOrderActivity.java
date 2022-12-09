@@ -1,15 +1,20 @@
 package com.example.softmethproj5;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
-
-public class CurrentOrderActivity extends AppCompatActivity {
+/**
+ * This activity class defines the Current Order page. It sets the view displayed to the user, defines the elements of the page
+ * and defines the functionality of the page.
+ *
+ * @author Kennan Guan and Adwait Ganguly
+ */
+public class CurrentOrderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayAdapter<String> adapter;
     private ArrayList<String> currentPizzas = new ArrayList<>();
@@ -18,23 +23,20 @@ public class CurrentOrderActivity extends AppCompatActivity {
     private double orderTotal;
     private double salesTax;
     private ArrayList<Order> allOrders;
-
     private ArrayList<Pizza> allPizzas;
-    private EditText orderNumberDisplay;
+    private TextView orderNumberDisplay;
     private ListView orderDisplay;
-    private EditText subtotalDisplay;
-    private EditText salesTaxDisplay;
-    private EditText orderTotalDisplay;
-    private Button remove;
+    private TextView subtotalDisplay;
+    private TextView salesTaxDisplay;
+    private TextView orderTotalDisplay;
     private Button clear;
     private Button placeOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.currentorder);
+        setContentView(R.layout.current_order);
 
-        remove = findViewById(R.id.removePizza);
         clear = findViewById(R.id.clearOrder);
         placeOrder = findViewById(R.id.placeOrder);
         orderDisplay = findViewById(R.id.pizzaOrders);
@@ -60,52 +62,55 @@ public class CurrentOrderActivity extends AppCompatActivity {
             subPrice += p.price();
             currentPizzas.add(p.toString());
         }
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentPizzas);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, currentPizzas);
+        orderDisplay.setOnItemClickListener(this);
         orderDisplay.setAdapter(adapter);
         orderTotal = subPrice * 1.06625;
         salesTax = subPrice * 0.06625;
         salesTax = Math.round(salesTax * 100) / 100.0;
         orderTotal = Math.round(orderTotal * 100) / 100.0;
 
+        subtotalDisplay.setText("$" + String.format("%.2f", subPrice));
+        orderTotalDisplay.setText("$" + String.format("%.2f", orderTotal));
+        salesTaxDisplay.setText("$" + String.format("%.2f", salesTax));
+
+
+
     }
 
     /**
      * This method removes a Pizza from the current order when the user selects a pizza from the order ListView and then
      * selects the Remove button.
-     * @param view the view where the action originated from.
      */
-    public void removePizza(View view) {
-        if (orderDisplay.getCheckedItemCount() != 0) {
-            int index = orderDisplay.getCheckedItemPosition();
-            subPrice -= this.currentOrder.getCurrentOrder().get(index).price();
-            salesTax = subPrice * 0.06625;
-            orderTotal = subPrice * 1.06625;
-            salesTax = Math.round(salesTax * 100) / 100.0;
-            orderTotal = Math.round(orderTotal * 100) / 100.0;
-            subtotalDisplay.setText(String.format("%.2f", subPrice));
-            orderTotalDisplay.setText(String.format("%.2f", orderTotal));
-            salesTaxDisplay.setText(String.format("%.2f", salesTax));
-
-            currentPizzas.remove(index);
-            currentOrder.getCurrentOrder().remove(index);
-            allPizzas.remove(index);
-            adapter.notifyDataSetChanged();
-        }
+    public void removePizza(int position) {;
+        subPrice -= this.currentOrder.getCurrentOrder().get(position).price();
+        salesTax = subPrice * 0.06625;
+        orderTotal = subPrice * 1.06625;
+        salesTax = Math.round(salesTax * 100) / 100.0;
+        orderTotal = Math.round(orderTotal * 100) / 100.0;
+        subtotalDisplay.setText("$" + String.format("%.2f", subPrice));
+        orderTotalDisplay.setText("$" + String.format("%.2f", orderTotal));
+        salesTaxDisplay.setText("$" + String.format("%.2f", salesTax));
+        currentPizzas.remove(position);
+        currentOrder.getCurrentOrder().remove(position);
+        allPizzas.remove(position);
+        adapter.notifyDataSetChanged();
     }
 
     /**
-     * This method clears the Order of pizzas from the current order when the user clicks the Clear
+     * This method clears the order of pizzas from the current order when the user clicks the Clear
      * Order button. The ListView is cleared and the order price is back to zero.
      * @param view the view where the action originated from.
      */
     public void clear(View view) {
-        currentOrder.clearOrder();
-        allPizzas.clear();
-        orderTotalDisplay.getText().clear();
-        subtotalDisplay.getText().clear();
-        salesTaxDisplay.getText().clear();
-        currentPizzas.clear();
-        adapter.notifyDataSetChanged();
+        if (adapter.getCount() != 0) {
+            currentOrder.clearOrder();
+            allPizzas.clear();
+            currentPizzas.clear();
+            this.currentOrder.updateOrderCount();
+            setCurrentOrder();
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -117,14 +122,36 @@ public class CurrentOrderActivity extends AppCompatActivity {
         if (this.currentOrder.getCurrentOrder().isEmpty()) {
             return;
         }
-        allOrders.add(this.currentOrder); //sent in list
+        allOrders.add(this.currentOrder);
         this.currentOrder.updateOrderCount();
-        orderNumberDisplay.getText().clear();
-        orderTotalDisplay.getText().clear();
-        subtotalDisplay.getText().clear();
-        salesTaxDisplay.getText().clear();
         currentPizzas.clear();
         allPizzas.clear();
+        setCurrentOrder();
         adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Called when the user clicks on a pizza in their order. Prompts the user if they want to delete the selected pizza.
+     * "Yes" will remove the pizza and "No" will do nothing.
+     * @param adapterView the adapterview where the clicked happened
+     * @param view the view where the item was clicked
+     * @param i the integer location of the clicked item
+     * @param l the row id where the item was clicked
+     */
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Delete Pizza?");
+        alert.setMessage(adapterView.getAdapter().getItem(i).toString());
+        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                removePizza(i);
+            }
+        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 }

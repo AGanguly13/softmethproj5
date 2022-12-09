@@ -8,9 +8,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
-                android:text="TextView"
+                android:text="@string/pizza"
                 android:layout_width="wrap_content"
-                android:layout_height="34dp" android:id="@+id/textView3"
+                android:layout_height="34dp" android:id="@+id/pizza_name"
                 android:gravity="center"/>
         <ImageView
                 android:layout_width="match_parent"
@@ -53,25 +53,25 @@
                     android:text="@string/Sausage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Sausage"
-                    android:layout_weight="1" android:textSize="10sp"/>
+                    android:layout_weight="1" android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/Pepperoni"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/Pepperoni"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/GreenPepper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/GreenPepper"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/Onion"
                     android:layout_width="76dp"
                     android:layout_height="wrap_content" android:id="@+id/Onion"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -82,25 +82,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Mushroom"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/BBQChicken"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/BBQChicken"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/Provolone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Provolone"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/Cheddar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Cheddar"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -111,31 +111,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Beef"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/Ham"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Ham"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/Pineapple"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Pineapple"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/Olive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/Olive"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
             <CheckBox
                     android:text="@string/BuffaloSauce"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/BuffaloSauce"
                     android:layout_weight="1"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" android:onClick="onCheckBoxClicked"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
@@ -158,6 +158,6 @@
                 android:layout_height="wrap_content" android:id="@+id/button"
                 android:layout_marginTop="30dp"
                 android:gravity="center|center_horizontal|center_vertical"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" android:onClick="addPizza"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

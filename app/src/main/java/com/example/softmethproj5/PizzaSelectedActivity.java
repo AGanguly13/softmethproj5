@@ -9,6 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the Pizza Selected Activity which is where the user can customize the size of their pizza,
+ * customize the toppings of their Build Your Own pizza, and add the pizza to their order.
+ *
+ * @author Adwait Ganguly, Kennan Guan
+ */
 public class PizzaSelectedActivity extends AppCompatActivity {
 
     private TextView pizzaName;
@@ -17,55 +23,80 @@ public class PizzaSelectedActivity extends AppCompatActivity {
 
     private String pizzaInfo;
 
-    private TextView pizzaPrice = findViewById(R.id.pizzaPrice);
+    private TextView pizzaPrice;
 
-    private RadioButton small = findViewById(R.id.smallButton);
+    private RadioButton small;
 
-    private RadioButton medium = findViewById(R.id.mediumButton);
+    private RadioButton medium;
 
-    private RadioButton large = findViewById(R.id.largeButton);
+    private RadioButton large;
 
     private RadioGroup radioGroup;
     private Pizza newPizza;
 
-    private CheckBox sausage = findViewById(R.id.Sausage);
+    private CheckBox sausage;
 
-    private CheckBox pepperoni = findViewById(R.id.Pepperoni);
+    private CheckBox pepperoni;
 
-    private CheckBox greenpepper = findViewById(R.id.GreenPepper);
+    private CheckBox greenpepper;
 
-    private CheckBox onion = findViewById(R.id.Onion);
+    private CheckBox onion;
 
-    private CheckBox mushroom = findViewById(R.id.Mushroom);
+    private CheckBox mushroom;
 
-    private CheckBox bbqchicken = findViewById(R.id.BBQChicken);
+    private CheckBox bbqchicken;
 
-    private CheckBox provolone = findViewById(R.id.Provolone);
+    private CheckBox provolone;
 
-    private CheckBox cheddar = findViewById(R.id.Cheddar);
+    private CheckBox cheddar;
 
-    private CheckBox beef = findViewById(R.id.Beef);
+    private CheckBox beef;
 
-    private CheckBox ham = findViewById(R.id.Ham);
+    private CheckBox ham;
 
-    private CheckBox pineapple = findViewById(R.id.Pineapple);
+    private CheckBox pineapple;
 
-    private CheckBox olive = findViewById(R.id.Olive);
+    private CheckBox olive;
 
-    private CheckBox buffalosauce = findViewById(R.id.BuffaloSauce);
+    private CheckBox buffalosauce;
 
     private ArrayList<Topping> pizzaToppings = new ArrayList<Topping>();
 
     private static final int NOTINSTRING = -1;
-    private static final int MAXTOPPINGS = 8;
+    private static final int MAXTOPPINGS = 7;
     private static final double TOPPINGPRICE = 1.59;
     private static final int[] checkboxes = {R.id.Sausage, R.id.Pepperoni, R.id.GreenPepper, R.id.Onion, R.id.Mushroom, R.id.BBQChicken, R.id.Provolone, R.id.Cheddar, R.id.Beef, R.id.Ham, R.id.Pineapple,
                                 R.id.Olive, R.id.BuffaloSauce};
 
+    /**
+     * This method initializes the Pizza Selected Activity screen that contains the information of the pizza
+     * the user selected from the Main Activity RecyclerView.
+     * @param savedInstanceState contains the data associated with this activity when it is exited.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pizza_selection);
+        sausage = findViewById(R.id.Sausage);
+        pepperoni = findViewById(R.id.Pepperoni);
+        greenpepper = findViewById(R.id.GreenPepper);
+        onion = findViewById(R.id.Onion);
+        mushroom = findViewById(R.id.Mushroom);
+        bbqchicken = findViewById(R.id.BBQChicken);
+        provolone = findViewById(R.id.Provolone);
+        cheddar = findViewById(R.id.Cheddar);
+        beef = findViewById(R.id.Beef);
+        ham = findViewById(R.id.Ham);
+        pineapple = findViewById(R.id.Pineapple);
+        olive = findViewById(R.id.Olive);
+        buffalosauce = findViewById(R.id.BuffaloSauce);
+        pizzaName = findViewById(R.id.pizza_name);
+        pizzaImage = findViewById(R.id.imageView);
+        pizzaPrice = findViewById(R.id.pizzaPrice);
+        small = findViewById(R.id.smallButton);
+        medium = findViewById(R.id.mediumButton);
+        large = findViewById(R.id.largeButton);
+
         Intent intent = getIntent();
         //String pizzaInfo = intent.getStringExtra("PIZZA");
         newPizza = (Pizza) intent.getSerializableExtra("PIZZA");
@@ -77,6 +108,10 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         addListenerOnRadioButton(newPizza);
     }
 
+    /**
+     * This method sets the TextView of this activity that represents the name of the pizza that the user has selected.
+     * @param pizzaInformation is the pizza object that is represented on the screen.
+     */
     public void setPizzaName(Pizza pizzaInformation) {
         if (pizzaInformation.toString().indexOf("Chicago Style") != NOTINSTRING) {
             if (pizzaInformation.toString().indexOf("Deluxe") != NOTINSTRING) {
@@ -116,53 +151,63 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This is the method that sets the toppings for any of the pizzas that have a default, unchangeable set
+     * of toppings.
+     * @param pizzaInformation is the pizza object that is represented on the screen.
+     */
     public void setToppings(Pizza pizzaInformation) {
         if (pizzaInformation.toString().indexOf("Build your own") != NOTINSTRING) {
             return;
         }
         enableCheckBoxes();
         for (Topping topping: pizzaInformation.getToppings()) {
-            switch (topping) {
-                case SAUSAGE:
-                    sausage.setChecked(true);
-                case PEPPERONI:
-                    pepperoni.setChecked(true);
-                case GREENPEPPER:
-                    greenpepper.setChecked(true);
-                case ONION:
-                    onion.setChecked(true);
-                case MUSHROOM:
-                    mushroom.setChecked(true);
-                case BBQCHICKEN:
-                    bbqchicken.setChecked(true);
-                case PROVOLONE:
-                    provolone.setChecked(true);
-                case CHEDDAR:
-                    cheddar.setChecked(true);
-                case BEEF:
-                    beef.setChecked(true);
-                case HAM:
-                    ham.setChecked(true);
-                case PINEAPPLE:
-                    pineapple.setChecked(true);
-                case OLIVE:
-                    olive.setChecked(true);
-                case BUFFALOSAUCE:
-                    buffalosauce.setChecked(true);
+            if (topping.toString().equalsIgnoreCase("SAUSAGE")) {
+                sausage.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("PEPPERONI")) {
+                pepperoni.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("GREENPEPPER")) {
+                greenpepper.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("ONION")) {
+                onion.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("MUSHROOM")) {
+                mushroom.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("BBQCHICKEN")) {
+                bbqchicken.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("PROVOLONE")) {
+                provolone.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("CHEDDAR")) {
+                cheddar.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("BEEF")) {
+                beef.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("HAM")) {
+                ham.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("PINEAPPLE")) {
+                pineapple.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("OLIVE")) {
+                olive.setChecked(true);
+            } else if (topping.toString().equalsIgnoreCase("BUFFALOSAUCE")) {
+                buffalosauce.setChecked(true);
             }
         }
         disableCheckboxes();
     }
 
+    /**
+     * This method disables all checkboxes on the screen, which occurs when a user has selected on the of the pizzas
+     * with preset toppings that should not be changed.
+     */
     public void disableCheckboxes() {
         for (int x = 0; x < checkboxes.length; x++) {
             CheckBox checkBox = (CheckBox) findViewById(checkboxes[x]);
-            if (!checkBox.isChecked()) {
-                checkBox.setEnabled(false);
-            }
+            checkBox.setEnabled(false);
         }
     }
 
+    /**
+     * This method enables all the checkboxes, which is necessary when a user is ordering a Build Your Own pizza
+     * and needs to select different toppings.
+     */
     public void enableCheckBoxes() {
         for (int x = 0; x < checkboxes.length; x++) {
             CheckBox checkBox = (CheckBox) findViewById(checkboxes[x]);
@@ -170,53 +215,78 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method sets the price of a pizza and sets the corresponding TextView to that price.
+     * @param pizza is the pizza object that is represented on the screen.
+     */
     public void setPrice(Pizza pizza) {
         pizzaPrice.setText("");
-        if (pizza.toString().indexOf("Build") != NOTINSTRING) {
-            pizzaPrice.setText(String.format("%.2f",pizza.price() + pizza.getToppings().size() * TOPPINGPRICE));
-        }
-        else {
-            pizzaPrice.setText(String.format("%.2f", pizza.price()));
-        }
+        pizzaPrice.setText(String.format("%.2f",pizza.price()));
     }
 
+    /**
+     * This method represents the listener for the RadioGroup containing all the Size RadioButtons.
+     * @param pizza is the pizza object that is represented on the screen.
+     */
     public void addListenerOnRadioButton (Pizza pizza) {
         radioGroup = findViewById(R.id.sizeGroup);
 
+        /**
+         * This method contains a lambda expression to update the size of the pizza when the user presses a new
+         * RadioButton. Based on the user selection the price displayed to the user also updates correspondingly.
+         * @param group
+         * @param checked
+         */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checked) {
-                switch(checked) {
-                    case R.id.smallButton:
-                        pizza.setSize(Size.SMALL);
-                    case R.id.mediumButton:
-                        pizza.setSize(Size.MEDIUM);
-                    case R.id.largeButton:
-                        pizza.setSize(Size.LARGE);
+                if (small.isChecked()) {
+                    pizza.setSize(Size.SMALL);
                 }
+                else if (medium.isChecked()) {
+                    pizza.setSize(Size.MEDIUM);
+                }
+                else if (large.isChecked()) {
+                    pizza.setSize(Size.LARGE);
+                }
+                setPrice(pizza);
             }
         });
-        setPrice(pizza);
     }
 
+    /**
+     * This method updates the price and toppings of Build Your Own pizza every time the user selects or deselects a checkbox.
+     * @param view is the CheckBox on the Activity screen that the user has selected.
+     */
+    public void onCheckBoxClicked(View view) {
+        boolean isChecked = ((CheckBox) view).isChecked();
+
+        if (isChecked) {
+            newPizza.getToppings().add(Topping.valueOf(((CheckBox) view).getText().toString().toUpperCase()));
+            setPrice(newPizza);
+        }
+        else {
+            newPizza.getToppings().remove(Topping.valueOf(((CheckBox) view).getText().toString().toUpperCase()));
+            setPrice(newPizza);
+        }
+
+    }
+
+    /**
+     * This method is invoked when the user is satisfied with their pizza selection and decides to order that pizza by
+     * pressing the Add Pizza button. The user is not allowed to add a pizza if it has more than eight toppings. The pizza the user
+     * has ordered is added to the list of all pizzas in a certain order.
+     * @param view is the Add Pizza button that the user selects to invoke this method.
+     */
     public void addPizza(View view) {
         int counter = 0;
         for (int x = 0; x < checkboxes.length; x++) {
             CheckBox cBox = (CheckBox) findViewById(checkboxes[x]);
             if (cBox.isChecked()) {
                 counter++;
-                if (newPizza.toString().indexOf("Build") != NOTINSTRING) {
-                    newPizza.getToppings().add(Topping.valueOf(cBox.getText().toString().toUpperCase()));
-                }
             }
         }
         if (counter > MAXTOPPINGS) {
-            newPizza.getToppings().clear();
-            Context context = getApplicationContext();
-            CharSequence text = "You can only select a maximum of 8 toppings.";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            Toast.makeText(this, "You can only select up to 7 toppings!", Toast.LENGTH_SHORT).show();
         }
 
         else {

@@ -1,38 +1,48 @@
 package com.example.softmethproj5;
 
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-
-public class StoreOrderActivity extends AppCompatActivity {
+/**
+ * Activity class for the Store Order functionality. It sets the displayed view for the user, initializes the elements, and defines
+ * the functionality for the Store Order page.
+ *
+ * @author Kennan Guan and Adwait Ganguly
+ */
+public class StoreOrderActivity extends AppCompatActivity{
 
     private ArrayAdapter<String> adapterOrders;
 
     private ArrayAdapter<Integer> adapterNumbers;
 
-    private ArrayList<Integer> orderSerialNumbers;
+    private ArrayList<Integer> orderSerialNumbers = new ArrayList<>();
 
-    private ArrayList<String> currentOrders;
+    private ArrayList<String> currentOrders = new ArrayList<>();
 
     private static StoreOrder orders;
-
-    private Button cancelOrder;
 
     private ListView orderDisplay;
 
     private Spinner orderNumList;
 
-    private EditText orderTotal;
+    private TextView orderTotal;
 
+    /**
+     * Called when this activity is opened first. Sets the correct layout to the app's view and initializes all elements
+     * seen on the page.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.storeorders);
+        setContentView(R.layout.store_orders);
 
-        cancelOrder = findViewById(R.id.cancelOrder);
         orderDisplay = findViewById(R.id.storeOrdersList);
         orderNumList = findViewById(R.id.selectOrder);
         orderTotal = findViewById(R.id.storeOrderTotal);
@@ -44,13 +54,26 @@ public class StoreOrderActivity extends AppCompatActivity {
         orderNumList.setAdapter(adapterNumbers);
 
         setOrdersList(MainActivity.ordersList);
+        orderNumList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                displayCurrentOrder();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+
+        });
     }
 
     /**
-     * This method displays an order based on which serial number is selected from the Combo Box by the user. This method is invoked when a user selects a serial number
+     * This method displays an order based on which serial number is selected from the Spinner by the user. This method is invoked when a user selects a serial number
      * from the Spinner
      */
     public void displayCurrentOrder() {
+        currentOrders.clear();
         double orderPrice = 0;
         if (orderNumList.getSelectedItem() == null) {
             return;
@@ -66,9 +89,9 @@ public class StoreOrderActivity extends AppCompatActivity {
         }
         orderPrice *= 1.06625;
         orderPrice = Math.round(orderPrice * 100) / 100.0;
+        orderTotal.setText("$" + String.format("%.2f", orderPrice));
         adapterOrders.notifyDataSetChanged();
         adapterNumbers.notifyDataSetChanged();
-        orderTotal.setText(String.format("%.2f", orderPrice));
     }
 
     /**
@@ -76,23 +99,17 @@ public class StoreOrderActivity extends AppCompatActivity {
      * clicks the Cancel Order button.
      */
     public void cancelOrder(View view) {
-        if (orderNumList.getSelectedItem() == null) {
-            return;
-        }
-
-        for (int x = 0; x < this.orders.getOrders().size(); x++) {
-            if ((Integer)orderNumList.getSelectedItem() == this.orders.getOrders().get(x).getSerialNumber()) {
-                for (int i = 0; i < orderSerialNumbers.size(); i++) {
-                    if (orderSerialNumbers.get(i) == (Integer)orderNumList.getSelectedItem()) {
-                        orderSerialNumbers.remove(i);
-                    }
-                }
-                orderTotal.setText("");
-                orders.getOrders().remove(x);
-                setOrdersList(orders.getOrders());
-                return;
+        int orderID = (Integer) orderNumList.getSelectedItem();
+        for (int i = 0; i < orderSerialNumbers.size(); i++){
+            if (orderSerialNumbers.get(i) == orderID) {
+                orderSerialNumbers.remove(i);
+                orders.getOrders().remove(i);
             }
         }
+        orderTotal.setText("");
+        currentOrders.clear();
+        setOrdersList(orders.getOrders());
+
     }
 
 
@@ -105,8 +122,9 @@ public class StoreOrderActivity extends AppCompatActivity {
         updateOrderList();
     }
 
+
     /**
-     * This is a helper method to update the list of serial numbers used in the ComboBox.
+     * This is a helper method to update the list of serial numbers used in the Spinner.
      */
     public void updateOrderList() {
         for (Order order: this.orders.getOrders()) {
@@ -115,6 +133,8 @@ public class StoreOrderActivity extends AppCompatActivity {
             }
         }
         adapterNumbers.notifyDataSetChanged();
+        adapterOrders.notifyDataSetChanged();
     }
+
 }
 

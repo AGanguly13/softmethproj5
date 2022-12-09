@@ -3,11 +3,11 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pizzaRowLayout">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pizzaRowLayout" android:paddingTop="20dp">
     <androidx.cardview.widget.CardView
-            android:layout_width="409dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="50dp"
@@ -19,11 +19,11 @@
                 android:layout_height="match_parent">
             <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pizzaName"/>
+                    android:layout_height="match_parent"
+                    android:id="@+id/pizzaName" android:textAlignment="viewStart"/>
             <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     tools:srcCompat="@tools:sample/avatars"
                     android:id="@+id/pizzaImage"/>
         </LinearLayout>
