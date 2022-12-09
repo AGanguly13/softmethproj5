@@ -218,19 +218,10 @@ public class PizzaSelectedActivity extends AppCompatActivity {
             CheckBox cBox = (CheckBox) findViewById(checkboxes[x]);
             if (cBox.isChecked()) {
                 counter++;
-                if (newPizza.toString().indexOf("Build") != NOTINSTRING) {
-                    newPizza.getToppings().add(Topping.valueOf(cBox.getText().toString().toUpperCase()));
-                }
             }
         }
         if (counter > MAXTOPPINGS) {
-            newPizza.getToppings().clear();
-            Context context = getApplicationContext();
-            CharSequence text = "You can only select a maximum of 8 toppings.";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            Toast.makeText(this, "You can only select up to 8 toppings!", Toast.LENGTH_SHORT).show();
         }
 
         else {

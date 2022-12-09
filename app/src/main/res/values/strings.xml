@@ -27,17 +27,17 @@
 
     <string name="Sausage">Sausage</string>
     <string name="Pepperoni">Pepperoni</string>
-    <string name="GreenPepper">Green Pepper</string>
+    <string name="GreenPepper">GreenPepper</string>
     <string name="Onion">Onion</string>
     <string name="Mushroom">Mushroom</string>
-    <string name="BBQChicken">BBQ Chicken</string>
+    <string name="BBQChicken">BBQChicken</string>
     <string name="Provolone">Provolone</string>
     <string name="Cheddar">Cheddar</string>
     <string name="Beef">Beef</string>
     <string name="Ham">Ham</string>
     <string name="Pineapple">Pineapple</string>
     <string name="Olive">Olive</string>
-    <string name="BuffaloSauce">Buffalo Sauce</string>
+    <string name="BuffaloSauce">BuffaloSauce</string>
 
     <string name="add_pizza">Add Pizza</string>
 
