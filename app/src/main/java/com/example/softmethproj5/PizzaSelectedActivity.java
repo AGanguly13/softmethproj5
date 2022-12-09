@@ -10,6 +10,12 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the Pizza Selected Activity which is where the user can customize the size of their pizza,
+ * customize the toppings of their Build Your Own pizza, and add the pizza to their order.
+ *
+ * @author Adwait Ganguly, Kennan Guan
+ */
 public class PizzaSelectedActivity extends AppCompatActivity {
 
     private TextView pizzaName;
@@ -58,11 +64,16 @@ public class PizzaSelectedActivity extends AppCompatActivity {
     private ArrayList<Topping> pizzaToppings = new ArrayList<Topping>();
 
     private static final int NOTINSTRING = -1;
-    private static final int MAXTOPPINGS = 8;
+    private static final int MAXTOPPINGS = 7;
     private static final double TOPPINGPRICE = 1.59;
     private static final int[] checkboxes = {R.id.Sausage, R.id.Pepperoni, R.id.GreenPepper, R.id.Onion, R.id.Mushroom, R.id.BBQChicken, R.id.Provolone, R.id.Cheddar, R.id.Beef, R.id.Ham, R.id.Pineapple,
                                 R.id.Olive, R.id.BuffaloSauce};
 
+    /**
+     * This method initializes the Pizza Selected Activity screen that contains the information of the pizza
+     * the user selected from the Main Activity RecyclerView.
+     * @param savedInstanceState contains the data associated with this activity when it is exited.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +90,10 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         addListenerOnRadioButton(newPizza);
     }
 
+    /**
+     * This method sets the TextView of this activity that represents the name of the pizza that the user has selected.
+     * @param pizzaInformation is the pizza object that is represented on the screen.
+     */
     public void setPizzaName(Pizza pizzaInformation) {
         if (pizzaInformation.toString().indexOf("Chicago Style") != NOTINSTRING) {
             if (pizzaInformation.toString().indexOf("Deluxe") != NOTINSTRING) {
@@ -118,6 +133,11 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This is the method that sets the toppings for any of the pizzas that have a default, unchangeable set
+     * of toppings.
+     * @param pizzaInformation is the pizza object that is represented on the screen.
+     */
     public void setToppings(Pizza pizzaInformation) {
         if (pizzaInformation.toString().indexOf("Build your own") != NOTINSTRING) {
             return;
@@ -155,6 +175,10 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         disableCheckboxes();
     }
 
+    /**
+     * This method disables all checkboxes on the screen, which occurs when a user has selected on the of the pizzas
+     * with preset toppings that should not be changed.
+     */
     public void disableCheckboxes() {
         for (int x = 0; x < checkboxes.length; x++) {
             CheckBox checkBox = (CheckBox) findViewById(checkboxes[x]);
@@ -162,6 +186,10 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method enables all the checkboxes, which is necessary when a user is ordering a Build Your Own pizza
+     * and needs to select different toppings.
+     */
     public void enableCheckBoxes() {
         for (int x = 0; x < checkboxes.length; x++) {
             CheckBox checkBox = (CheckBox) findViewById(checkboxes[x]);
@@ -169,6 +197,10 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method sets the price of a pizza and sets the corresponding TextView to that price.
+     * @param pizza is the pizza object that is represented on the screen.
+     */
     public void setPrice(Pizza pizza) {
         pizzaPrice.setText("");
         if (pizza.toString().indexOf("Build") != NOTINSTRING) {
@@ -179,10 +211,20 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method represents the listener for the RadioGroup containing all the Size RadioButtons.
+     * @param pizza is the pizza object that is represented on the screen.
+     */
     public void addListenerOnRadioButton (Pizza pizza) {
         radioGroup = findViewById(R.id.sizeGroup);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            /**
+             * This method contains a lambda expression to update the size of the pizza when the user presses a new
+             * RadioButton. Based on the user selection the price displayed to the user also updates correspondingly.
+             * @param group
+             * @param checked
+             */
             public void onCheckedChanged(RadioGroup group, int checked) {
                 if (small.isChecked()) {
                     pizza.setSize(Size.SMALL);
@@ -198,6 +240,10 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method updates the price and toppings of Build Your Own pizza every time the user selects or deselects a checkbox.
+     * @param view is the CheckBox on the Activity screen that the user has selected.
+     */
     public void onCheckBoxClicked(View view) {
         boolean isChecked = ((CheckBox) view).isChecked();
 
@@ -212,6 +258,12 @@ public class PizzaSelectedActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This method is invoked when the user is satisfied with their pizza selection and decides to order that pizza by
+     * pressing the Add Pizza button. The user is not allowed to add a pizza if it has more than eight toppings. The pizza the user
+     * has ordered is added to the list of all pizzas in a certain order.
+     * @param view is the Add Pizza button that the user selects to invoke this method.
+     */
     public void addPizza(View view) {
         int counter = 0;
         for (int x = 0; x < checkboxes.length; x++) {

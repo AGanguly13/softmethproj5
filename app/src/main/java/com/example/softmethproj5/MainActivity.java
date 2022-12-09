@@ -12,12 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the functionality of the Main Activity screen of the application. This screen contains a RecyclerView of all
+ * possible pizza options, and two buttons to navigate to the Current Orders activity and the Store Orders activity.
+ *
+ * @author Adwait Ganguly, Kennan Guan
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
-
-    public int [] itemImages = {R.drawable.chicagobbq, R.drawable.chicagodeluxe, R.drawable.chicagomeatzza, R.drawable.chicagobuildyourown,
-            R.drawable.nypizza, R.drawable.nydeluxe, R.drawable.nymeatzza, R.drawable.nypizza};
 
     public static ArrayList<Pizza> pizzasInOrder = new ArrayList<>();
 
@@ -44,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         setButtonListener();
     }
 
+    /**
+     * This is a helper method that fills the array with pizza objects representing each of the eight different types of pizza.
+     */
     private void fillRecycleViewArray() {
         pizzas.add(new ChicagoPizza().createBBQChicken(Size.valueOf(getResources().getString(R.string.largeSize))));
         pizzas.add(new ChicagoPizza().createDeluxe(Size.valueOf(getResources().getString(R.string.largeSize))));
@@ -55,10 +61,19 @@ public class MainActivity extends AppCompatActivity {
         pizzas.add(new NYPizza().createBuildYourOwn(null, Size.valueOf(getResources().getString(R.string.largeSize))));
     }
 
+    /**
+     * This method sets the listener for the Current Order button. This method contains the lambda expressions that
+     * are onClick methods for the Current Order and Store Order buttons.
+     */
     public void setButtonListener() {
 
         Button currentOrderButton = (Button) findViewById(R.id.currentOrderButton);
         currentOrderButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method represents the onClick action when the user presses the Current Order button. This method
+             * opens the Current Order Activity.
+             * @param view is the Current Order button that was clicked to initialize this method.
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CurrentOrderActivity.class);
@@ -68,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
 
         Button storeOrderButton = (Button) findViewById(R.id.storeOrderButton);
         storeOrderButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method represents the onClick action when the user presses the Store Order button. This method
+             * opens the Store Order Activity.
+             * @param view is the Store Order button that was clicked to initialize this method.
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), StoreOrderActivity.class);

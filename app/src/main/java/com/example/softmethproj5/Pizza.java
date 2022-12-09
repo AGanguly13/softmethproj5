@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * This class is an implementation of the Customizable interface and defines a Pizza object. A Pizza object will have a Crust object instance variable, a Size object instance variable and a
+ * This class is an implementation of the Customizable and Serializable interfaces and defines a Pizza object. A Pizza object will have a Crust object instance variable, a Size object instance variable and a
  * ArrayList of Toppings instance variable. This class also defines a constructor for a Pizza, as well as getter methods and add() and remove() methods.
  *
  * @author Adwait Ganguly, Kennan Guan
