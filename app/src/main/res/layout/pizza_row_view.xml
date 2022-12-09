@@ -12,7 +12,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="50dp" app:layout_constraintEnd_toEndOf="parent">
+            android:layout_marginEnd="50dp" app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="20dp">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -20,10 +21,10 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/pizzaName"/>
+                    android:id="@+id/pizzaName" android:gravity="center"/>
             <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     tools:srcCompat="@tools:sample/avatars"
                     android:id="@+id/pizzaImage"/>
         </LinearLayout>
