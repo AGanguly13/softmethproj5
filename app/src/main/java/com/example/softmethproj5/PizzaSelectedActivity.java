@@ -198,6 +198,20 @@ public class PizzaSelectedActivity extends AppCompatActivity {
         });
     }
 
+    public void onCheckBoxClicked(View view) {
+        boolean isChecked = ((CheckBox) view).isChecked();
+
+        if (isChecked) {
+            newPizza.getToppings().add(Topping.valueOf(((CheckBox) view).getText().toString().toUpperCase()));
+            setPrice(newPizza);
+        }
+        else {
+            newPizza.getToppings().remove(Topping.valueOf(((CheckBox) view).getText().toString().toUpperCase()));
+            setPrice(newPizza);
+        }
+
+    }
+
     public void addPizza(View view) {
         int counter = 0;
         for (int x = 0; x < checkboxes.length; x++) {
