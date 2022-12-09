@@ -22,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
 
-    public int [] itemImages = {R.drawable.chicagobbq, R.drawable.chicagodeluxe, R.drawable.chicagomeatzza, R.drawable.chicagobuildyourown,
-            R.drawable.nypizza, R.drawable.nydeluxe, R.drawable.nymeatzza, R.drawable.nypizza};
-
     public static ArrayList<Pizza> pizzasInOrder = new ArrayList<>();
 
     public static ArrayList<Order> ordersList = new ArrayList<>();

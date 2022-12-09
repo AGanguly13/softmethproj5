@@ -64,7 +64,6 @@ public class PizzaSelectedActivity extends AppCompatActivity {
 
     private static final int NOTINSTRING = -1;
     private static final int MAXTOPPINGS = 7;
-    private static final double TOPPINGPRICE = 1.59;
     private static final int[] checkboxes = {R.id.Sausage, R.id.Pepperoni, R.id.GreenPepper, R.id.Onion, R.id.Mushroom, R.id.BBQChicken, R.id.Provolone, R.id.Cheddar, R.id.Beef, R.id.Ham, R.id.Pineapple,
                                 R.id.Olive, R.id.BuffaloSauce};
 
@@ -142,7 +141,7 @@ public class PizzaSelectedActivity extends AppCompatActivity {
             }
             else if (pizzaInformation.toString().indexOf("BBQChicken") != NOTINSTRING) {
                 pizzaName.setText(R.string.ny_bbq);
-                pizzaImage.setImageResource(R.drawable.nypizza);
+                pizzaImage.setImageResource(R.drawable.ny_bbqchicken);
             }
             else if (pizzaInformation.toString().indexOf("Build your own") != NOTINSTRING) {
                 pizzaName.setText(R.string.ny_byo);
@@ -231,13 +230,13 @@ public class PizzaSelectedActivity extends AppCompatActivity {
     public void addListenerOnRadioButton (Pizza pizza) {
         radioGroup = findViewById(R.id.sizeGroup);
 
-        /**
-         * This method contains a lambda expression to update the size of the pizza when the user presses a new
-         * RadioButton. Based on the user selection the price displayed to the user also updates correspondingly.
-         * @param group
-         * @param checked
-         */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            /**
+             * This method contains a lambda expression to update the size of the pizza when the user presses a new
+             * RadioButton. Based on the user selection the price displayed to the user also updates correspondingly.
+             * @param group is the Radio Group of buttons representing different pizza sizes.
+             * @param checked is the index of the checked button.
+             */
             public void onCheckedChanged(RadioGroup group, int checked) {
                 if (small.isChecked()) {
                     pizza.setSize(Size.SMALL);

@@ -11,6 +11,8 @@
         <entry key="..\:/Users/kenna/IdeaProjects/softmethproj5/app/src/main/res/layout/pizza_selection.xml" value="0.33" />
         <entry key="..\:/Users/kenna/IdeaProjects/softmethproj5/app/src/main/res/layout/store_orders.xml" value="0.3484375" />
         <entry key="..\:/Users/kenna/IdeaProjects/softmethproj5/app/src/main/res/layout/storeorders.xml" value="0.3484375" />
+        <entry key="..\:/Users/kenna/IdeaProjects/softmethproj5/app/src/main/res/mipmap-anydpi-v26/rutgersLogo.xml" value="0.2795" />
+        <entry key="..\:/Users/kenna/IdeaProjects/softmethproj5/app/src/main/res/mipmap-anydpi-v26/rutgerslogo.xml" value="0.2795" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/currentorder.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.4036458333333333" />
@@ -21,6 +23,11 @@
         <entry key="app/src/main/res/layout/storeorders.xml" value="0.4036458333333333" />
       </map>
     </option>
+  </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/javadoc" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="false" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 32 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

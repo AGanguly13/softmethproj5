@@ -36,7 +36,7 @@ public class StoreOrderActivity extends AppCompatActivity{
     /**
      * Called when this activity is opened first. Sets the correct layout to the app's view and initializes all elements
      * seen on the page.
-     * @param savedInstanceState
+     * @param savedInstanceState contains the data associated with the activity when it is exited.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,8 @@ public class StoreOrderActivity extends AppCompatActivity{
         orderDisplay = findViewById(R.id.storeOrdersList);
         orderNumList = findViewById(R.id.selectOrder);
         orderTotal = findViewById(R.id.storeOrderTotal);
+        currentOrders.add("Select");
+        orderSerialNumbers.add(0);
 
         adapterOrders = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentOrders);
         orderDisplay.setAdapter(adapterOrders);
@@ -75,9 +77,6 @@ public class StoreOrderActivity extends AppCompatActivity{
     public void displayCurrentOrder() {
         currentOrders.clear();
         double orderPrice = 0;
-        if (orderNumList.getSelectedItem() == null) {
-            return;
-        }
 
         for (int i = 0; i < orders.getOrders().size(); i++) {
             if (orders.getOrders().get(i).getSerialNumber() == (Integer)orderNumList.getSelectedItem()) {
@@ -97,18 +96,24 @@ public class StoreOrderActivity extends AppCompatActivity{
     /**
      * This method cancels the current order selected by the user and displayed on the screen. This method is invoked when the user selects an order to display and then
      * clicks the Cancel Order button.
+     * @param view the view in which the button was clicked.
      */
     public void cancelOrder(View view) {
         int orderID = (Integer) orderNumList.getSelectedItem();
         for (int i = 0; i < orderSerialNumbers.size(); i++){
             if (orderSerialNumbers.get(i) == orderID) {
+                if (i == 0){
+                    return;
+                }
+                orders.getOrders().remove(i-1);
+                orderNumList.setSelection(i-1);
                 orderSerialNumbers.remove(i);
-                orders.getOrders().remove(i);
             }
         }
         orderTotal.setText("");
         currentOrders.clear();
         setOrdersList(orders.getOrders());
+        displayCurrentOrder();
 
     }
 

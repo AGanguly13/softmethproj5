@@ -32,6 +32,11 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
     private Button clear;
     private Button placeOrder;
 
+    /**
+     * This method initializes the Current Order Activity screen where the user can see the pizzas in their current
+     * order and decide whether they want to remove any pizzas or complete the order.
+     * @param savedInstanceState contains the data associated with this activity when it is exited.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,9 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
         setCurrentOrder();
     }
 
+    /**
+     * This method sets the current order of pizzas based on the public ArrayList of pizzas that is filled by the user.
+     */
     public void setCurrentOrder() {
         ArrayList<Pizza> pizzas = MainActivity.pizzasInOrder;
         allPizzas = pizzas;
@@ -81,8 +89,9 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
     /**
      * This method removes a Pizza from the current order when the user selects a pizza from the order ListView and then
      * selects the Remove button.
+     * @param position the index that the selected pizza is located.
      */
-    public void removePizza(int position) {;
+    public void removePizza(int position) {
         subPrice -= this.currentOrder.getCurrentOrder().get(position).price();
         salesTax = subPrice * 0.06625;
         orderTotal = subPrice * 1.06625;
@@ -104,10 +113,8 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
      */
     public void clear(View view) {
         if (adapter.getCount() != 0) {
-            currentOrder.clearOrder();
             allPizzas.clear();
             currentPizzas.clear();
-            this.currentOrder.updateOrderCount();
             setCurrentOrder();
             adapter.notifyDataSetChanged();
         }

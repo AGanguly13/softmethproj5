@@ -33,6 +33,7 @@ public interface PizzaFactory {
 
     /**
      * This method defines the common operation of creating a Build Your Own pizza in the NYPizza and ChicagoPizza classes.
+     * @param toppings the list of toppings of the new pizza object.
      * @param size is the Size of the new pizza object.
      * @return a new Build Your Own pizza.
      */
